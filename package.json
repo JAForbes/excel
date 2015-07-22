@@ -1,0 +1,26 @@
+{
+  "name": "excel",
+  "version": "0.0.0",
+  "description": "A simple spreadsheet app",
+  "main": "electron.js",
+  "scripts": {
+    "bundle": "browserify src/mian.js --debug | exorcist dist/main.js.map > dist/main.js",
+    "minifiy": "uglifyjs dist/main.js --in-source-map dist/main.js.map --source-map-url main.min.js.map --source-map dist/main.min.js.map -o dist/main.min.js",
+    "clean": "rm dist/main.js dist/main.js.map",
+    "win-debug-dist": "npm run bundle & npm run minifiy & npm run clean",
+    "win-release": "npm run win-debug-dist & git add -A & git commit -m \"New Release\" & git pull & npm version patch & git push & git push --tags"
+  },
+  "author": "james.a.forbes@gmail.com <=> (http://james-forbes.com)",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.8.1",
+    "mithril": "^0.2.0"
+  },
+  "devDependencies": {
+    "browserify": "~10.2.4",
+    "exorcist": "^0.4.0",
+    "uglify-js": "^2.4.23",
+    "watch": "^0.16.0",
+    "watchify": "^3.2.3"
+  }
+}

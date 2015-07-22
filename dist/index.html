@@ -1,0 +1,29 @@
+ <!doctype html>
+<html>
+
+
+	<head>
+		<title>Excel</title>
+		<meta http-equiv="x-ua-compatible" content="IE=edge">
+		<style>
+			td {
+				width: 100px;
+				background-color: #EEE;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			var script = document.createElement("script")
+			if( typeof require === "undefined"){
+				script.src = "main.min.js"
+			} else {
+				script.innerText = "require('../src/main.js')"
+			}
+			document.body.appendChild(script)
+		</script>
+
+	</body>
+</html>
+
+
