@@ -4,7 +4,7 @@
   "description": "A simple spreadsheet app",
   "main": "electron.js",
   "scripts": {
-    "bundle": "browserify src/mian.js --debug | exorcist dist/main.js.map > dist/main.js",
+    "bundle": "browserify src/main.js --debug -t babelify | exorcist dist/main.js.map > dist/main.js",
     "minifiy": "uglifyjs dist/main.js --in-source-map dist/main.js.map --source-map-url main.min.js.map --source-map dist/main.min.js.map -o dist/main.min.js",
     "clean": "rm dist/main.js dist/main.js.map",
     "win-debug-dist": "npm run bundle & npm run minifiy & npm run clean",
@@ -17,6 +17,7 @@
     "mithril": "^0.2.0"
   },
   "devDependencies": {
+    "babelify": "^6.1.3",
     "browserify": "~10.2.4",
     "exorcist": "^0.4.0",
     "uglify-js": "^2.4.23",

@@ -25,9 +25,9 @@ var app = {
       focused: null,
       blurCell: ( cell ) => instance.focused == cell.address && (instance.focused = null),
       table: [
-        [ c("A1"), c("A2"), c("A3"), c("A4") ],
-        [ c("B1"), c("B2"), c("B3"), c("B4") ],
-        [ c("C1"), c("C2"), c("C3"), c("C4") ],
+        [ c("A1", "Gross"), c("A2", "Tax"), c("A3", "Net"), c("A4") ],
+        [ c("B1", 3000), c("B2","=0.37 * B1"), c("B3","=B1 - B2"), c("B4") ],
+        [ c("C1","=add = (a,b) => a + b"), c("C2", "= sum = (list) => list.reduce(add)"), c("C3", "=sum([B1, B2, B3])"), c("C4") ],
       ]
     }
     calculate( instance.table, flatten(instance.table) )
@@ -53,14 +53,22 @@ var app = {
 
 
       try {
-        var evaluated = eval(cell.calculated) || ""
-      } catch (e) {
-        console.error(e.message)
-      }
+        var evaluated = cell.formula[0] == "=" && eval(cell.calculated) || cell.formula
+      } catch (e) {}
+
       return m("input[type=text]", {
           value: ctrl.focused == cell.address ? cell.formula : evaluated,
           oninput: m.withAttr("value",
-            ( value ) => (cell.formula = value) && calculate(ctrl.table, flatten(ctrl.table))
+            (( value ) => {
+
+              cell.formula = value;
+
+              try {
+                calculate(ctrl.table, flatten(ctrl.table))
+              } catch (e) {
+                console.error(e)
+              }
+            })
           ),
           onfocus: () => ctrl.focused = cell.address,
           onblur:  () => {
