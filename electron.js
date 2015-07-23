@@ -23,8 +23,11 @@ app.on('window-all-closed', function() {
 // This method will be called when Electron has done everything
 // initialization and ready for creating browser windows.
 app.on('ready', function() {
+
+  app.commandLine.appendSwitch('js-flags', '--harmony_arrow_functions');
+
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 400, height: 550,
+  mainWindow = new BrowserWindow({width: 730, height: 100,
     //"min-width": 400, "max-width": 400, "min-height": 550, "max-height":550
    });
 

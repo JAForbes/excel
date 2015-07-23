@@ -1,0 +1,1 @@
+module.exports = (list) => list.reduce( ((flat, row) => flat.concat(row)), [])
