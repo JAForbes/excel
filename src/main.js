@@ -64,7 +64,9 @@ var app = {
               cell.formula = value;
 
               try {
-                calculate(ctrl.table, flatten(ctrl.table))
+                m.startCalculation()
+                  calculate(ctrl.table, flatten(ctrl.table))
+                m.endCalculation()
               } catch (e) {
                 console.error(e)
               }
